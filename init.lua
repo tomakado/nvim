@@ -21,15 +21,22 @@ opt.wrap = false
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.mouse = 'a'
+opt.foldmethod = 'indent'
+opt.ruler = true
+opt.colorcolumn = '120'
+
+cmd [[set nofoldenable]]
+cmd [[set noswapfile]]
 
 g.tokyonight_style = 'night'
-cmd [[colorscheme tokyonight]]
---cmd [[colorscheme melange]]
 
+cmd [[set background=dark]]
+cmd [[colorscheme gruvbox]]
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 -- Setup Go for DAP
+-- FIXME
 dap.adapters.go = {
 	type = 'executable';
 	command = 'node';

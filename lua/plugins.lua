@@ -57,12 +57,12 @@ return require('packer').startup({ function()
 		end
 	}
 
-	-- ==> Load which-key
-	--use { "folke/which-key.nvim",
-	--	config = function()
-	--		require('user.which_key').setup()
-	--	end,
-	-- }
+	-- ==> Load pretty-fold
+	use { 'anuvyklack/pretty-fold.nvim',
+   config = function()
+      require('pretty-fold').setup()
+   end
+	}
 
 	-- ==> Load lualine
 	use { 'nvim-lualine/lualine.nvim',
@@ -71,10 +71,15 @@ return require('packer').startup({ function()
 			require('lualine').setup({
 				options = {
 					theme = "auto",
+					component_separators = { left = '', right = '' },
+					section_separators = { left = '', right = '' },
 				}
 			})
 		end,
 	}
+
+	-- Commenting code
+	use 'tpope/vim-commentary'
 
 	-- Code analysis and completion
 	use 'neovim/nvim-lspconfig'
@@ -92,6 +97,7 @@ return require('packer').startup({ function()
 	-- Color schemes
 	use 'folke/tokyonight.nvim'
 	use "savq/melange"
+	use "ellisonleao/gruvbox.nvim"
 
 	-- Git
 	use 'airblade/vim-gitgutter'
