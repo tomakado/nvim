@@ -98,6 +98,8 @@ return require('packer').startup({ function()
 	use 'folke/tokyonight.nvim'
 	use "savq/melange"
 	use "ellisonleao/gruvbox.nvim"
+	use 'bluz71/vim-moonfly-colors'
+	use 'ackyshake/Spacegray.vim'
 
 	-- Git
 	use 'airblade/vim-gitgutter'

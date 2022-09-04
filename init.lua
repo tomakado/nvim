@@ -31,7 +31,7 @@ cmd [[set noswapfile]]
 g.tokyonight_style = 'night'
 
 cmd [[set background=dark]]
-cmd [[colorscheme gruvbox]]
+cmd [[colorscheme spacegray]]
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
@@ -55,3 +55,6 @@ dap.configurations.go = {
 }
 
 g.copilot_enabled = true
+
+-- Folding
+opt.foldmethod = 'manual'
