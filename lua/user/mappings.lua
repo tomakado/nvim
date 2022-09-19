@@ -12,6 +12,8 @@ map('n', '<leader>sf', '<cmd>Telescope find_files find_command=rg,--ignore,--hid
 map('n', '<leader>s', '<cmd>Telescope live_grep prompt_prefix=🔍 <cr>')
 map('n', '<leader>sb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>sr', '<cmd>Telescope oldfiles<cr>')
+map('n', '<leader>slr', '<cmd>Telescope lsp_references<cr>')
+map('n', '<leader>sli', '<cmd>Telescope lsp_implementations<cr>')
 
 -- Neotree
 map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')

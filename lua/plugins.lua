@@ -59,9 +59,9 @@ return require('packer').startup({ function()
 
 	-- ==> Load pretty-fold
 	use { 'anuvyklack/pretty-fold.nvim',
-   config = function()
-      require('pretty-fold').setup()
-   end
+		config = function()
+			require('pretty-fold').setup()
+		end
 	}
 
 	-- ==> Load lualine
@@ -100,6 +100,11 @@ return require('packer').startup({ function()
 	use "ellisonleao/gruvbox.nvim"
 	use 'bluz71/vim-moonfly-colors'
 	use 'ackyshake/Spacegray.vim'
+	use 'doums/darcula'
+	use 'marko-cerovac/material.nvim'
+	use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
+	use { "ntk148v/komau.vim" }
+	use 'Mofiqul/vscode.nvim'
 
 	-- Git
 	use 'airblade/vim-gitgutter'
@@ -133,24 +138,24 @@ return require('packer').startup({ function()
 		end,
 	}
 	use 'ray-x/guihua.lua'
-	use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
-	use {
-		'yriveiro/dap-go.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-		config = function()
-			local git_ancestor = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.'))
-			if git_ancestor == nil then
-				return
-			end
+	-- use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
+	-- use {
+	-- 	'yriveiro/dap-go.nvim',
+	-- 	requires = { 'nvim-lua/plenary.nvim' },
+	-- 	config = function()
+	-- 		local git_ancestor = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.'))
+	-- 		if git_ancestor == nil then
+	-- 			return
+	-- 		end
 
-			require('dap-go').setup({
-				external_config = {
-					enable = true,
-					path = git_ancestor .. '/.vscode/launch.json'
-				}
-			})
-		end
-	}
+	-- 		require('dap-go').setup({
+	-- 			external_config = {
+	-- 				enable = true,
+	-- 				path = git_ancestor .. '/.vscode/launch.json'
+	-- 			}
+	-- 		})
+	-- 	end
+	-- }
 
 	-- Automatically setup plugins on first launch
 	if packer_bootstrap then
