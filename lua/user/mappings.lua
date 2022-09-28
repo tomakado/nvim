@@ -14,6 +14,7 @@ map('n', '<leader>sb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>sr', '<cmd>Telescope oldfiles<cr>')
 map('n', '<leader>slr', '<cmd>Telescope lsp_references<cr>')
 map('n', '<leader>sli', '<cmd>Telescope lsp_implementations<cr>')
+map('n', '<leader>sld', '<cmd>Telescope diagnostics bufnr=0<cr>')
 
 -- Neotree
 map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')

@@ -41,6 +41,24 @@ local on_attach = function(client, bufnr)
 
 end
 
+-- local server_config = function(server_name, cfg)
+-- 	local maybe_config = function(server_name_to_test)
+-- 		return server_name_to_test == server_name and cfg or {}
+-- 	end
+-- end
+
+local get_project_root = function(server_name)
+	local root_fn =  function()
+		if server_name == 'pyright' or server_name == 'pyls' then
+			return fn.getcwd() .. '/src'
+		else
+			return fn.getcwd()
+		end
+	end
+
+	return root_fn
+end
+
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
 
@@ -101,9 +119,22 @@ for _, server in ipairs(servers) do
 	lspconfig[server].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
+		-- root_dir = get_project_root(server),
 		flags = {
 			debounce_text_changes = 150,
-		}
+		},
+		settings = {
+			pyright = {
+				analysis = {
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					extraPaths = {
+						'./src',
+						'$VIRTUAL_ENV/lib/python3.8/site-packages',
+					},
+				},
+			},
+		},
 	}
 end
 

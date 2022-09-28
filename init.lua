@@ -34,7 +34,7 @@ g.tokyonight_style = 'night'
 g.spacegray_low_contrast = 1
 g.material_style = 'darker'
 
-cmd [[colorscheme vscode]]
+cmd [[colorscheme kanagawa]]
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 

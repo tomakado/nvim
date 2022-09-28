@@ -105,6 +105,8 @@ return require('packer').startup({ function()
 	use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
 	use { "ntk148v/komau.vim" }
 	use 'Mofiqul/vscode.nvim'
+	use 'rebelot/kanagawa.nvim'
+	use 'rockerBOO/boo-colorscheme-nvim'
 
 	-- Git
 	use 'airblade/vim-gitgutter'
