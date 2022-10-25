@@ -111,6 +111,7 @@ return require('packer').startup({ function()
 	-- Git
 	use 'airblade/vim-gitgutter'
 	use 'kdheepak/lazygit.nvim'
+	use 'APZelos/blamer.nvim'
 
 	-- File explorer
 	use { 'nvim-neo-tree/neo-tree.nvim',

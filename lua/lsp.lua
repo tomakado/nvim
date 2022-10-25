@@ -41,12 +41,6 @@ local on_attach = function(client, bufnr)
 
 end
 
--- local server_config = function(server_name, cfg)
--- 	local maybe_config = function(server_name_to_test)
--- 		return server_name_to_test == server_name and cfg or {}
--- 	end
--- end
-
 local get_project_root = function(server_name)
 	local root_fn =  function()
 		if server_name == 'pyright' or server_name == 'pyls' then
@@ -64,9 +58,6 @@ o.completeopt = 'menuone,noselect'
 
 -- nvim-cmp setup
 cmp.setup {
-  -- completion = {
-	-- 	autocomplete = false
-  -- },
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
@@ -87,15 +78,6 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    --['<Tab>'] = function(fallback)
-    --  if fn.pumvisible() == 1 then
-    --    fn.feedkeys(api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-    --  elseif luasnip.expand_or_jumpable() then
-    --    fn.feedkeys(api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
-    --  else
-    --   fallback()
-    --  end
-    --end,
     ['<S-Tab>'] = function(fallback)
       if fn.pumvisible() == 1 then
         fn.feedkeys(api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
@@ -113,13 +95,12 @@ cmp.setup {
   },
 }
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, server in ipairs(servers) do
 	lspconfig[server].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
-		-- root_dir = get_project_root(server),
 		flags = {
 			debounce_text_changes = 150,
 		},

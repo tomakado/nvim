@@ -36,6 +36,8 @@ g.tokyonight_style = 'night'
 g.spacegray_low_contrast = 1
 g.material_style = 'darker'
 
+g.blamer_enabled = 1
+
 cmd [[colorscheme kanagawa]]
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
