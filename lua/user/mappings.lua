@@ -25,3 +25,7 @@ map('n', '<leader>dc', '<cmd>GoDbgContinue<cr>')
 map('n', '<leader>dr', '<cmd>GoDebug -R<cr>')
 map('n', '<leader>ds', '<cmd>GoDebug -s<cr>')
 map('n', '<leader>db', '<cmd>GoBreakToggle<cr>')
+
+-- Make `d' to just delete without cutting
+map('n', 'd', '"_d')
+map('v', 'd', '"_d')
