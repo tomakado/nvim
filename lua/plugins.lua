@@ -29,30 +29,40 @@ return require('packer').startup({ function()
 	use 'kyazdani42/nvim-web-devicons'
 
 	-- ==> Load nvim-telesecope.
-	use { "nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
+	use { 'nvim-telescope/telescope.nvim',
+		requires = { { 'nvim-lua/plenary.nvim' } },
+	}
+
+	use {
+		'kylechui/nvim-surround',
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require('nvim-surround').setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
 	}
 
 	-- ==> Load treesitter
 	use {
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
 		config = function()
-			require("nvim-treesitter.configs").setup {
+			require('nvim-treesitter.configs').setup {
 				highlight = {
 					enable = true,
 				},
 				additional_vim_regex_highlighting = false,
 			}
 
-			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 			parser_config.just = {
 				install_info = {
-					url = "https://github.com/IndianBoy42/tree-sitter-just", -- local path or git repo
-					files = { "src/parser.c", "src/scanner.cc" },
-					branch = "main",
+					url = 'https://github.com/IndianBoy42/tree-sitter-just', -- local path or git repo
+					files = { 'src/parser.c', 'src/scanner.cc' },
+					branch = 'main',
 				},
-				maintainers = { "@IndianBoy42" },
+				maintainers = { '@IndianBoy42' },
 			}
 		end
 	}
