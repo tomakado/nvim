@@ -10,6 +10,7 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 local api = vim.api
+local cmd = vim.cmd
 
 opt.number = true
 opt.cursorline = true
@@ -27,6 +28,7 @@ opt.ruler = true
 opt.colorcolumn = '120'
 opt.background = 'dark'
 opt.numberwidth = 5
+opt.relativenumber = true
 
 cmd [[set nofoldenable]]
 cmd [[set noswapfile]]
@@ -38,7 +40,7 @@ g.material_style = 'darker'
 
 g.blamer_enabled = 1
 
-cmd [[colorscheme kanagawa]]
+cmd.colorscheme('rose-pine')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 

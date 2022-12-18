@@ -81,15 +81,40 @@ return require('packer').startup({ function()
 			require('lualine').setup({
 				options = {
 					theme = "auto",
-					component_separators = { left = '', right = '' },
-					section_separators = { left = '', right = '' },
+					-- component_separators = { left = '', right = '' },
+					-- section_separators = { left = '', right = '' },
 				}
 			})
 		end,
 	}
 
+	-- Fancy diagnostics UI
+	use {
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	}
+
 	-- Commenting code
 	use 'tpope/vim-commentary'
+
+	-- -- Indent lines
+	-- use {
+	-- 	'lukas-reineke/indent-blankline.nvim',
+	-- 	config = function()
+	-- 		require('indent_blankline').setup {
+	-- 			-- for example, context is off by default, use this to turn it on
+	-- 			show_current_context = true,
+	-- 			show_current_context_start = true,
+	-- 		}
+	-- 	end,
+	-- }
 
 	-- Code analysis and completion
 	use 'neovim/nvim-lspconfig'
@@ -98,11 +123,23 @@ return require('packer').startup({ function()
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
 	use 'hrsh7th/nvim-cmp'
-
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
-
 	use 'github/copilot.vim'
+
+	use 'mbbill/undotree'
+
+	use {
+		'folke/todo-comments.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function()
+			require('todo-comments').setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	}
 
 	-- Color schemes
 	use 'folke/tokyonight.nvim'
@@ -117,6 +154,7 @@ return require('packer').startup({ function()
 	use 'Mofiqul/vscode.nvim'
 	use 'rebelot/kanagawa.nvim'
 	use 'rockerBOO/boo-colorscheme-nvim'
+	use { 'rose-pine/neovim', as = 'rose-pine' }
 
 	-- Git
 	use 'airblade/vim-gitgutter'
@@ -142,6 +180,12 @@ return require('packer').startup({ function()
 			})
 		end,
 	}
+
+	-- EdgeDB
+	use 'edgedb/edgedb-vim'
+
+	-- D2
+	use 'terrastruct/d2-vim'
 
 	-- Advanced Go language support
 	use {
