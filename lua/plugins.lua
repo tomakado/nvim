@@ -154,7 +154,23 @@ return require('packer').startup({ function()
 	use 'Mofiqul/vscode.nvim'
 	use 'rebelot/kanagawa.nvim'
 	use 'rockerBOO/boo-colorscheme-nvim'
-	use { 'rose-pine/neovim', as = 'rose-pine' }
+	use { 'rose-pine/neovim',
+		as = 'rose-pine',
+		config = function()
+			require('rose-pine').setup {
+				disable_italics = true,
+				background = 'moon',
+			}
+		end,
+	}
+	use 'mrjones2014/lighthaus.nvim'
+	use {
+		"mcchrish/zenbones.nvim",
+		-- Optionally install Lush. Allows for more configuration or extending the colorscheme
+		-- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+		-- In Vim, compat mode is turned on as Lush only works in Neovim.
+		requires = "rktjmp/lush.nvim"
+	}
 
 	-- Git
 	use 'airblade/vim-gitgutter'
@@ -213,6 +229,9 @@ return require('packer').startup({ function()
 	-- 		})
 	-- 	end
 	-- }
+
+	-- Godot support
+	use 'habamax/vim-godot'
 
 	-- Automatically setup plugins on first launch
 	if packer_bootstrap then

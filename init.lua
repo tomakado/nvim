@@ -40,7 +40,7 @@ g.material_style = 'darker'
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('rose-pine')
+cmd.colorscheme('kanagawa')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
