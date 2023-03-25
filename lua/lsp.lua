@@ -7,7 +7,7 @@ local fn = vim.fn
 local lsp = vim.lsp
 local o = vim.o
 
-local servers = {'gopls', 'pyright', 'sumneko_lua', 'rust_analyzer', 'gdscript'}
+local servers = {'gopls', 'pyright', 'lua_ls', 'rust_analyzer', 'gdscript'}
 
 local on_attach = function(client, bufnr)
 
