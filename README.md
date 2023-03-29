@@ -1,13 +1,13 @@
 # My Neovim Configuration
 
-## Requirements
+## Dependencies & requirements 
 
-* Neovim 0.7+
-* Packer
+- Neovim 0.7+
+- Git
 
 ## Install
 
 ```shell
-nvim +PackerSync
+./install.sh
 ```
 
