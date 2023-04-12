@@ -53,6 +53,7 @@ return require('packer').startup({ function()
 					enable = true,
 				},
 				additional_vim_regex_highlighting = false,
+				ensure_installed = { 'go', 'python', 'lua', 'vim', 'rust', 'yaml', 'toml', 'typescript', 'javascript', 'help' }
 			}
 
 			local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
