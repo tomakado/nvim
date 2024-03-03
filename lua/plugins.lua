@@ -30,7 +30,17 @@ return require('packer').startup({ function()
 
 	-- ==> Load nvim-telesecope.
 	use { 'nvim-telescope/telescope.nvim',
-		requires = { { 'nvim-lua/plenary.nvim' } },
+		requires = { 'nvim-lua/plenary.nvim' },
+		config = function() 
+			require('telescope').setup({
+				extensions = {
+					dash = {
+						dash_app_path = '/Applications/Setapp/Dash.app',
+						debounce = 150,
+					}
+				}
+		})
+		end
 	}
 
 	use {
@@ -53,7 +63,7 @@ return require('packer').startup({ function()
 					enable = true,
 				},
 				additional_vim_regex_highlighting = false,
-				ensure_installed = { 'go', 'python', 'lua', 'vim', 'rust', 'yaml', 'toml', 'typescript', 'javascript', 'help' }
+				ensure_installed = { 'go', 'python', 'lua', 'vim', 'rust', 'yaml', 'toml', 'typescript', 'javascript', 'vimdoc' }
 			}
 
 			local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
@@ -233,6 +243,15 @@ return require('packer').startup({ function()
 
 	-- Godot support
 	use 'habamax/vim-godot'
+
+	-- Emmet support
+	use 'mattn/emmet-vim'
+
+	-- Dash and doc search
+	use({
+		'mrjones2014/dash.nvim',
+		run = 'make install',
+	})
 
 	-- Automatically setup plugins on first launch
 	if packer_bootstrap then
