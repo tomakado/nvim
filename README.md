@@ -2,7 +2,7 @@
 
 ## Dependencies & requirements 
 
-- Neovim 0.9+
+- Neovim 0.10.0+
 - Ripgrep
 - LazyGit
 
