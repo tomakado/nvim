@@ -6,10 +6,11 @@ local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
 local o = vim.o
+local cmd = vim.cmd
 
 local servers = {'gopls', 'pyright', 'lua_ls', 'rust_analyzer', 'gdscript'}
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 
   local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) api.nvim_buf_set_option(bufnr, ...) end
@@ -37,21 +38,18 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', opts)
 
 end
 
-local get_project_root = function(server_name)
-	local root_fn =  function()
-		if server_name == 'pyright' or server_name == 'pyls' then
-			return fn.getcwd() .. '/src'
-		else
-			return fn.getcwd()
-		end
-	end
-
-	return root_fn
-end
+-- Format Go code before saving
+api.nvim_create_autocmd('BufWritePre', {
+	pattern = { '*.go' },
+	callback = function ()
+		lsp.buf.format({ async = false })
+		cmd ':GoImport'
+	end,
+})
 
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'

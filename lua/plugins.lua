@@ -94,6 +94,22 @@ return require('packer').startup({ function()
 					theme = "auto",
 					-- component_separators = { left = '', right = '' },
 					-- section_separators = { left = '', right = '' },
+				},
+				sections = {
+					lualine_x = {
+      -- Options with default values
+						{
+							"copilot",
+							show_running = true,
+							symbols = {
+								status = {
+									enabled = " ",
+									disabled = " ",
+								},
+								spinners = require("copilot-status.spinners").dots,
+							},
+						},
+					}
 				}
 			})
 		end,
@@ -137,6 +153,7 @@ return require('packer').startup({ function()
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
 	use 'github/copilot.vim'
+	use 'ofseed/copilot-status.nvim'
 
 	use 'mbbill/undotree'
 
@@ -157,7 +174,6 @@ return require('packer').startup({ function()
 	use "savq/melange"
 	use "ellisonleao/gruvbox.nvim"
 	use 'bluz71/vim-moonfly-colors'
-	use 'ackyshake/Spacegray.vim'
 	use 'doums/darcula'
 	use 'marko-cerovac/material.nvim'
 	use { 'shaunsingh/oxocarbon.nvim', run = './install.sh' }
@@ -182,6 +198,7 @@ return require('packer').startup({ function()
 		-- In Vim, compat mode is turned on as Lush only works in Neovim.
 		requires = "rktjmp/lush.nvim"
 	}
+	use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- Git
 	use 'airblade/vim-gitgutter'
@@ -239,7 +256,10 @@ return require('packer').startup({ function()
 	-- 			}
 	-- 		})
 	-- 	end
-	-- }
+	-- 
+	
+	-- Lua support
+	use 'folke/neodev.nvim'
 
 	-- Godot support
 	use 'habamax/vim-godot'
@@ -252,6 +272,8 @@ return require('packer').startup({ function()
 		'mrjones2014/dash.nvim',
 		run = 'make install',
 	})
+
+	use 'nvimtools/none-ls.nvim'
 
 	-- Automatically setup plugins on first launch
 	if packer_bootstrap then

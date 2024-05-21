@@ -34,13 +34,13 @@ cmd [[set nofoldenable]]
 cmd [[set noswapfile]]
 cmd [[set clipboard+=unnamedplus]]
 
-g.tokyonight_style = 'night'
+--g.tokyonight_style = 'day'
 g.spacegray_low_contrast = 1
 g.material_style = 'darker'
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('kanagawa')
+cmd.colorscheme('tokyonight')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
