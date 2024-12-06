@@ -40,28 +40,9 @@ g.material_style = 'darker'
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('tokyonight')
+cmd.colorscheme('catppuccin')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
--- Setup Go for DAP
--- FIXME
--- dap.adapters.go = {
--- 	type = 'executable';
--- 	command = 'node';
--- 	args = { os.getenv('HOME') .. '/opt/vscode-go/dist/debugAdapter.js' };
--- }
-
--- dap.configurations.go = {
--- 	{
--- 		type = 'go';
--- 		name = 'Debug';
--- 		request = 'launch';
--- 		showLog = true;
--- 		program = '${workspaceFolder}/cmd/backend/main.go';
--- 		dlvToolPath = fn.exepath('dlv') -- Adjust to where delve is installed
--- 	},
--- }
 
 g.copilot_enabled = true
 

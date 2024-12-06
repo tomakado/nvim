@@ -4,6 +4,7 @@ local map = require('utils').map
 
 map('n', '<space>', '<nop')
 g.mapleader = '<Space>'
+g.maplocalleader = ','
 cmd [[map <space> <leader>]]
 
 -- Telescope
@@ -20,12 +21,15 @@ map('n', '<leader>st', '<cmd>TodoTelescope<cr>')
 -- Neotree
 map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')
 
--- Go Debugger
-map('n', '<leader>d', '<cmd>GoDebug<cr>')
-map('n', '<leader>dc', '<cmd>GoDbgContinue<cr>')
-map('n', '<leader>dr', '<cmd>GoDebug -R<cr>')
-map('n', '<leader>ds', '<cmd>GoDebug -s<cr>')
-map('n', '<leader>db', '<cmd>GoBreakToggle<cr>')
+-- Debugger
+map('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<cr>')
+map('n', '<leader>d', '<cmd>lua require("dap").continue()<cr>')
+map('n', '<leader>dr', '<cmd>lua require("dap").restart()<cr>')
+map('n', '<leader>dt', '<cmd>lua require("dap").terminate()<cr>')
+map('n', '<leader>dso', '<cmd>lua require("dap").step_over()<cr>')
+map('n', '<leader>dsi', '<cmd>lua require("dap").step_into()<cr>')
+map('n', '<leader>dsb', '<cmd>lua require("dap").step_back()<cr>')
+map('n', '<leader>?', '<cmd>lua require("dapui").eval(nil, { enter = true })<cr>')
 
 -- Make `d' to just delete without cutting
 map('n', 'd', '"_d')
