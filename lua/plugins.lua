@@ -79,13 +79,6 @@ return require('packer').startup({
 			end
 		}
 
-		-- ==> Load pretty-fold
-		use { 'anuvyklack/pretty-fold.nvim',
-			config = function()
-				require('pretty-fold').setup()
-			end
-		}
-
 		-- ==> Load lualine
 		use { 'nvim-lualine/lualine.nvim',
 			requires = { 'kyazdani42/nvim-web-devicons', opt = true },

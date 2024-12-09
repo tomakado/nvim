@@ -23,30 +23,31 @@ opt.wrap = false
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.mouse = 'a'
-opt.foldmethod = 'indent'
 opt.ruler = true
 opt.colorcolumn = '120'
 opt.background = 'dark'
 opt.numberwidth = 5
 opt.relativenumber = true
 
-cmd [[set nofoldenable]]
 cmd [[set noswapfile]]
 cmd [[set clipboard+=unnamedplus]]
 
---g.tokyonight_style = 'day'
 g.spacegray_low_contrast = 1
-g.material_style = 'darker'
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('catppuccin')
+cmd.colorscheme('kanagawa-dragon')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 g.copilot_enabled = true
 
 -- Folding
-opt.foldmethod = 'manual'
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+cmd [[ set nofoldenable]] 
+api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx", })
 
 opt.linebreak = true
+
