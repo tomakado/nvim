@@ -300,6 +300,9 @@ return require('packer').startup({
 
 		use 'nvimtools/none-ls.nvim'
 
+		-- Easy align
+		use 'junegunn/vim-easy-align'
+
 		-- Automatically setup plugins on first launch
 		if packer_bootstrap then
 			require('packer').sync()
