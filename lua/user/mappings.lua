@@ -18,6 +18,10 @@ map('n', '<leader>sld', '<cmd>Telescope diagnostics bufnr=0<cr>')
 map('n', '<leader>sc', '<cmd>Telescope commands<cr>')
 map('n', '<leader>st', '<cmd>TodoTelescope<cr>')
 
+-- Trouble
+map('n', '<leader>tld', '<cmd>Trouble diagnostics<cr>')
+map('n', '<leader>tqf', '<cmd>Trouble quickfix<cr>')
+
 -- Neotree
 map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')
 
@@ -37,3 +41,4 @@ map('v', 'd', '"_d')
 
 -- Toggle undo tree
 map('n', '<leader>u', '<cmd>UndotreeToggle<cr>')
+
