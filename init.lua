@@ -51,3 +51,5 @@ api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal z
 
 opt.linebreak = true
 
+opt.spell = true
+opt.spelllang = 'en_us,en_gb,es_es,es_mx,ru_ru'
