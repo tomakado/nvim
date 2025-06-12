@@ -1,7 +1,6 @@
 local g = vim.g
 local cmd = vim.cmd
 local map = require('utils').map
-
 map('n', '<space>', '<nop')
 g.mapleader = '<Space>'
 g.maplocalleader = ','

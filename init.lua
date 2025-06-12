@@ -2,6 +2,7 @@ require('plugins')
 require('user.mappings')
 require('lsp')
 require('markdown')
+require('copilot')
 --local dap = require('dap')
 
 local cmd = vim.cmd
@@ -28,6 +29,7 @@ opt.colorcolumn = '120'
 opt.background = 'dark'
 opt.numberwidth = 5
 opt.relativenumber = true
+opt.signcolumn = "yes:1"
 
 cmd [[set noswapfile]]
 cmd [[set clipboard+=unnamedplus]]
@@ -36,7 +38,7 @@ g.spacegray_low_contrast = 1
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('kanagawa-dragon')
+cmd.colorscheme('catppuccin')
 
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 

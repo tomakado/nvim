@@ -164,7 +164,21 @@ return require('packer').startup({
 		}
 
 		-- Color schemes
-		use { "catppuccin/nvim", as = "catppuccin" }
+		use {
+			"catppuccin/nvim", as = "catppuccin",
+			config = function()
+				require('catppuccin').setup({
+					flavour = "mocha",
+					color_overrides = {
+						mocha = {
+							base = "#000000",
+							mantle = "#000000",
+							crust = "#000000",
+						},
+					},
+				})
+			end,
+		}
 		use 'folke/tokyonight.nvim'
 		use "savq/melange"
 		use "ellisonleao/gruvbox.nvim"

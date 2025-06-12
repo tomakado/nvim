@@ -97,6 +97,12 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, server in ipairs(servers) do
 	lspconfig[server].setup {
+		handlers = {
+			["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+				-- Don't clear diagnostics while editing
+				update_in_insert = false,
+			}),
+		},
 		on_attach = on_attach,
 		capabilities = capabilities,
 		flags = {
