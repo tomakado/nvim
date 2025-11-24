@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local luasnip = require('luasnip')
 local cmp = require('cmp')
 
@@ -6,42 +5,41 @@ local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
 local o = vim.o
-local cmd = vim.cmd
 
 local servers = { 'gopls', 'pyright', 'lua_ls', 'rust_analyzer', 'gdscript', 'clojure_lsp' }
 
-local on_attach = function(_, bufnr)
-	local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
-	local function buf_set_option(...) api.nvim_buf_set_option(bufnr, ...) end
-
+local on_attach = function(client, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 	-- Mappings.
-	local opts = { noremap = true, silent = true }
+	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	buf_set_keymap('n', 'lgD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'lgd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-	buf_set_keymap('n', 'lK', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap('n', 'lgi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap('n', '<space>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	buf_set_keymap('n', '<space>lD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-	buf_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-	buf_set_keymap('n', 'lgr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-	buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', opts)
+	vim.keymap.set('n', 'lgD', vim.lsp.buf.declaration, opts)
+	vim.keymap.set('n', 'lgd', vim.lsp.buf.definition, opts)
+	vim.keymap.set('n', 'lK', vim.lsp.buf.hover, opts)
+	vim.keymap.set('n', 'lgi', vim.lsp.buf.implementation, opts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+	vim.keymap.set('n', '<space>lwa', vim.lsp.buf.add_workspace_folder, opts)
+	vim.keymap.set('n', '<space>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set('n', '<space>lwl', function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, opts)
+	vim.keymap.set('n', '<space>lD', vim.lsp.buf.type_definition, opts)
+	vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename, opts)
+	vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts)
+	vim.keymap.set('n', 'lgr', vim.lsp.buf.references, opts)
+	vim.keymap.set('n', '<space>le', vim.diagnostic.open_float, opts)
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+	vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+	vim.keymap.set('n', '<space>lf', function()
+		vim.lsp.buf.format({ async = false })
+	end, opts)
 end
 
 -- Run gofmt + goimports on save
-
 local format_sync_grp = api.nvim_create_augroup("goimports", {})
 api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
@@ -95,30 +93,73 @@ cmp.setup {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-for _, server in ipairs(servers) do
-	lspconfig[server].setup {
-		handlers = {
-			["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-				-- Don't clear diagnostics while editing
-				update_in_insert = false,
-			}),
-		},
-		on_attach = on_attach,
-		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		settings = {
-			pyright = {
-				analysis = {
-					autoSearchPaths = true,
-					useLibraryCodeForTypes = true,
-					extraPaths = {
-						'./src',
-						'$VIRTUAL_ENV/lib/python3.8/site-packages',
-					},
+-- Configure common settings for all servers
+vim.lsp.config['*'] = {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+-- Configure individual servers
+vim.lsp.config.gopls = {
+	cmd = { 'gopls' },
+	filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+	root_markers = { 'go.work', 'go.mod', '.git' },
+}
+
+vim.lsp.config.pyright = {
+	cmd = { 'pyright-langserver', '--stdio' },
+	filetypes = { 'python' },
+	root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', '.git' },
+	settings = {
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				extraPaths = {
+					'./src',
+					'$VIRTUAL_ENV/lib/python3.8/site-packages',
 				},
 			},
 		},
-	}
+	},
+}
+
+vim.lsp.config.lua_ls = {
+	cmd = { 'lua-language-server' },
+	filetypes = { 'lua' },
+	root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+	settings = {
+		Lua = {
+			runtime = { version = 'LuaJIT' },
+			diagnostics = { globals = { 'vim' } },
+			workspace = { 
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+			telemetry = { enable = false },
+		},
+	},
+}
+
+vim.lsp.config.rust_analyzer = {
+	cmd = { 'rust-analyzer' },
+	filetypes = { 'rust' },
+	root_markers = { 'Cargo.toml', 'rust-project.json' },
+}
+
+vim.lsp.config.gdscript = {
+	cmd = { 'nc', 'localhost', '6005' },
+	filetypes = { 'gd', 'gdscript', 'gdscript3' },
+	root_markers = { 'project.godot', '.git' },
+}
+
+vim.lsp.config.clojure_lsp = {
+	cmd = { 'clojure-lsp' },
+	filetypes = { 'clojure', 'edn' },
+	root_markers = { 'project.clj', 'deps.edn', 'build.boot', 'shadow-cljs.edn', '.git' },
+}
+
+-- Enable all servers
+for _, server in ipairs(servers) do
+	vim.lsp.enable(server)
 end
