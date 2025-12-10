@@ -44,3 +44,5 @@ map('v', 'd', '"_d')
 -- Toggle undo tree
 map('n', '<leader>u', '<cmd>UndotreeToggle<cr>')
 
+-- LazyGit
+map('n', '<leader>gg', '<cmd>LazyGit<cr>')
