@@ -22,7 +22,10 @@ map('n', '<leader>tld', '<cmd>Trouble diagnostics<cr>')
 map('n', '<leader>tqf', '<cmd>Trouble quickfix<cr>')
 
 -- Neotree
-map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')
+-- map('n', '<leader>fe', '<cmd>Neotree toggle<cr>')
+
+-- nvim-tree
+map('n', '<leader>fe', '<cmd>NvimTreeToggle<cr>')
 
 -- Debugger
 map('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<cr>')

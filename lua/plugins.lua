@@ -212,24 +212,12 @@ return require('packer').startup({
 		use 'APZelos/blamer.nvim'
 
 		-- File explorer
-		use { 'nvim-neo-tree/neo-tree.nvim',
-			branch = 'v2.x',
-			requires = {
-				'nvim-lua/plenary.nvim',
-				'kyazdani42/nvim-web-devicons', -- optional, for file icons
-				'MunifTanjim/nui.nvim',
-			},
+		use { 'nvim-tree/nvim-tree.lua',
 			config = function()
-				require('neo-tree').setup({
-					window = {
-						mappings = {
-							['<c-cr>'] = { 'toggle_node', nowait = true },
-							['<space>'] = 'none',
-						},
-					},
-				})
+				require('nvim-tree').setup()
 			end,
 		}
+
 
 		-- Debug
 		-- use 'puremourning/vimspector'
