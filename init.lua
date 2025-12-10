@@ -38,8 +38,6 @@ g.spacegray_low_contrast = 1
 
 g.blamer_enabled = 1
 
-cmd.colorscheme('catppuccin')
-
 cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 g.copilot_enabled = true
