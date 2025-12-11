@@ -33,14 +33,7 @@ return require('packer').startup({
 		use { 'nvim-telescope/telescope.nvim',
 			requires = { 'nvim-lua/plenary.nvim' },
 			config = function()
-				require('telescope').setup({
-					extensions = {
-						dash = {
-							dash_app_path = '/Applications/Setapp/Dash.app',
-							debounce = 150,
-						}
-					}
-				})
+				require('telescope').setup()
 			end
 		}
 
@@ -287,12 +280,6 @@ return require('packer').startup({
 		-- Clojure support
 		use 'Olical/conjure'
 		use 'guns/vim-sexp'
-
-		-- Dash and doc search
-		use({
-			'mrjones2014/dash.nvim',
-			run = 'make install',
-		})
 
 		use 'nvimtools/none-ls.nvim'
 
