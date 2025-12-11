@@ -125,18 +125,6 @@ return require('packer').startup({
 		-- Commenting code
 		use 'tpope/vim-commentary'
 
-		-- -- Indent lines
-		-- use {
-		-- 	'lukas-reineke/indent-blankline.nvim',
-		-- 	config = function()
-		-- 		require('indent_blankline').setup {
-		-- 			-- for example, context is off by default, use this to turn it on
-		-- 			show_current_context = true,
-		-- 			show_current_context_start = true,
-		-- 		}
-		-- 	end,
-		-- }
-
 		-- Code analysis and completion
 		use 'neovim/nvim-lspconfig'
 		use 'hrsh7th/cmp-nvim-lsp'
@@ -163,16 +151,24 @@ return require('packer').startup({
 			end
 		}
 
+		-- Highlight color HEX codes
+		use {
+			'norcalli/nvim-colorizer.lua',
+			config = function()
+				require('colorizer').setup()
+			end,
+		}
+
 		-- Color schemes
 		use {
 			"catppuccin/nvim", as = "catppuccin",
 			config = function()
 				require('catppuccin').setup({
 					flavour = "mocha",
-					transparent_background = true,
-					float = {
-						transparent = true,
-					},
+					-- transparent_background = true,
+					-- float = {
+					-- 	transparent = true,
+					-- },
 				})
 				vim.cmd.colorscheme('catppuccin')
 			end,
