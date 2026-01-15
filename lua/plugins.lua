@@ -115,6 +115,17 @@ return require('packer').startup({
 			end
 		}
 
+		-- Which key?
+		use {
+			'folke/which-key.nvim',
+			config = function()
+				require('which-key').setup {
+					-- your configuration comes here
+					-- or leave it empty to use the default settings
+				}
+			end
+		}
+
 		-- Commenting code
 		use 'tpope/vim-commentary'
 
@@ -196,9 +207,9 @@ return require('packer').startup({
 		}
 
 		-- Git
-		use 'airblade/vim-gitgutter'
 		use 'kdheepak/lazygit.nvim'
 		use 'APZelos/blamer.nvim'
+		use 'lewis6991/gitsigns.nvim'
 
 		-- File explorer
 		use { 'nvim-tree/nvim-tree.lua',
